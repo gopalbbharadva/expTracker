@@ -1,9 +1,12 @@
 import "./App.css";
+import InputComp from "./Components/InputComp";
+
+import { firestoreRef } from "./config";
 
 function App() {
   return (
     <div className="App">
-      <h1>app js component</h1>
+      <InputComp/>
     </div>
   );
 }
