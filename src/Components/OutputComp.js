@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { firestoreRef } from "../config";
 
 const OutputComp = ({ id, itemName, itemAmt, date }) => {
+//   let [total, setTotal] = useState(0);
+
+//   useEffect(() => {
+//     total =total+itemAmt;
+//     setTotal(total);
+//     console.log(total)
+//   }, [itemAmt]);
+
   const deleteItem = () => {
     const isDelete = window.confirm(`are you sure u want to delete ${itemAmt}`);
     if (isDelete) {
       firestoreRef.collection("expenses").doc(id).delete();
     }
   };
-  return (
-    <div>
+  if (date) {
+    return (
       <div className="expenseItem">
         <div
           style={{
@@ -21,9 +29,8 @@ const OutputComp = ({ id, itemName, itemAmt, date }) => {
           }}
         >
           <p style={{ margin: "0" }}>{itemName}</p>
-          {/* <small>
-            {date.toDate().toString()}
-          </small> */}
+          <small>{date.toDate().toDateString()}</small>
+          {/* <small>{total}</small> */}
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <small>
@@ -42,8 +49,8 @@ const OutputComp = ({ id, itemName, itemAmt, date }) => {
           </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else return <div></div>;
 };
 
 export default OutputComp;

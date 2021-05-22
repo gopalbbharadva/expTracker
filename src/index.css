@@ -21,8 +21,7 @@ header {
   border-radius: 1rem;
   padding: 0.5rem;
   max-width: 300px;
-  margin: auto;
-  margin-top: 1rem;
+  margin: 1rem auto;
   background-color: #fef2f2;
   display: flex;
   align-items: center;
@@ -50,8 +49,9 @@ input:focus {
   border: 2px solid black;
 }
 button {
+  font-size: 1rem;
   margin-top: 0.5rem;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
 }
 button:enabled {
   border-radius: 3px;
