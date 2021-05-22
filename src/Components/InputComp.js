@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRupeeSign,
@@ -22,7 +22,6 @@ const InputComp = () => {
     firestoreRef.collection("expenses").onSnapshot(function (snap) {
       setItemList(
         snap.docs.map((item) => ({
-
           id: item.id,
           item: item.data().item,
           itemAmount: item.data().itemAmount,
@@ -50,8 +49,8 @@ const InputComp = () => {
         <h3>Total:</h3>
         <div className="inputDiv-amt">
           <input
-            onChange={(e) => setItem(e.target.value)}
-            value={item}
+            onChange={(e) => setAmount(e.target.value)}
+            value={amt}
             style={{ fontSize: "1rem" }}
             type="number"
             placeholder="What's Amount?"
@@ -63,8 +62,8 @@ const InputComp = () => {
         </div>
         <div className="inputDiv-amt">
           <input
-            onChange={(e) => setAmount(e.target.value)}
-            value={amt}
+            onChange={(e) => setItem(e.target.value)}
+            value={item}
             type="text"
             style={{ fontSize: "1rem" }}
             placeholder="Which expense"
@@ -74,7 +73,7 @@ const InputComp = () => {
             <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
           </div>
         </div>
-        <button onClick={submitHandler}>
+        <button style={{ cursor: "pointer" }} onClick={submitHandler}>
           <FontAwesomeIcon icon={faAngleDoubleRight}></FontAwesomeIcon>
         </button>
       </div>

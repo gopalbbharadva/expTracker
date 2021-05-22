@@ -1,11 +1,49 @@
-import React from 'react'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { firestoreRef } from "../config";
 
-const OutputComp = ({id, itemName,itemAmt,date}) => {
-    return (
-        <div>
-            
+const OutputComp = ({ id, itemName, itemAmt, date }) => {
+  const deleteItem = () => {
+    const isDelete = window.confirm(`are you sure u want to delete ${itemAmt}`);
+    if (isDelete) {
+      firestoreRef.collection("expenses").doc(id).delete();
+    }
+  };
+  return (
+    <div>
+      <div className="expenseItem">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "self-start",
+          }}
+        >
+          <p style={{ margin: "0" }}>{itemName}</p>
+          {/* <small>
+            {date.toDate().toString()}
+          </small> */}
         </div>
-    )
-}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <small>
+            {itemAmt} <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
+          </small>
+          <button
+            onClick={deleteItem}
+            style={{
+              backgroundColor: "red",
+              padding: "0",
+              margin: "0",
+              fontSize: "larger",
+            }}
+          >
+            <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default OutputComp;
