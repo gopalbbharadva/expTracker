@@ -77,7 +77,7 @@ const InputComp = () => {
           <div className="inputDiv-amt">
             <input
               onChange={itemAmtHandler}
-              defaultValue={amt}
+              value={amt}
               style={{ fontSize: "1rem" }}
               type="number"
               placeholder="What's Amount?"
@@ -90,7 +90,7 @@ const InputComp = () => {
           <div className="inputDiv-amt">
             <input
               onChange={itemHandler}
-              defaultValue={item}
+              value={item}
               type="text"
               style={{ fontSize: "1rem" }}
               placeholder="Which expense"
