@@ -37,7 +37,7 @@ header {
   align-items: center;
 }
 input {
-    max-width: 100%;
+  max-width: 100%;
   padding: 1rem;
   margin: 0.5rem;
   border: none;
@@ -106,4 +106,12 @@ hr {
   max-width: 400px;
   margin: auto;
   margin-top: 10px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+form button{
+  align-self: center;
 }

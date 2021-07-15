@@ -4,13 +4,7 @@ import { faTrashAlt, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { firestoreRef } from "../config";
 
 const OutputComp = ({ id, itemName, itemAmt, date }) => {
-//   let [total, setTotal] = useState(0);
-
-//   useEffect(() => {
-//     total =total+itemAmt;
-//     setTotal(total);
-//     console.log(total)
-//   }, [itemAmt]);
+  
 
   const deleteItem = () => {
     const isDelete = window.confirm(`are you sure u want to delete ${itemAmt}`);

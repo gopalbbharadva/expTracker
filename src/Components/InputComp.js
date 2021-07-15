@@ -12,8 +12,8 @@ import OutputComp from "./OutputComp";
 
 const InputComp = () => {
   let [total, setTotal] = useState(0);
-  let [item, setItem] = useState('');
-  let [amt, setAmount] = useState('');
+  let [item, setItem] = useState("");
+  let [amt, setAmount] = useState("");
   const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
@@ -32,17 +32,18 @@ const InputComp = () => {
       );
     });
   };
-  const submitHandler = () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
     if (item && amt) {
-      firestoreRef.collection("expenses").add({
+      await firestoreRef.collection("expenses").add({
         item: item,
         itemAmount: amt,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
       total += parseInt(amt);
       setTotal(total);
-      setAmount("");
-      setItem("");
+      setAmount(" ");
+      setItem(" ");
     } else alert("Plz enter item data");
   };
 
@@ -73,10 +74,10 @@ const InputComp = () => {
       </header>
       <div className="inputDiv">
         <h3>{`Total:${total}`}</h3>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="inputDiv-amt">
             <input
-              onChange={itemAmtHandler}
+              onChange={(e)=> setAmount(e.target.value)}
               value={amt}
               style={{ fontSize: "1rem" }}
               type="number"
@@ -89,7 +90,7 @@ const InputComp = () => {
           </div>
           <div className="inputDiv-amt">
             <input
-              onChange={itemHandler}
+              onChange={(e)=>setItem(e.target.value)}
               value={item}
               type="text"
               style={{ fontSize: "1rem" }}
@@ -100,14 +101,10 @@ const InputComp = () => {
               <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
             </div>
           </div>
+          <button type="submit" style={{ cursor: "pointer" }}>
+            <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+          </button>
         </form>
-        <button
-          style={{ cursor: "pointer" }}
-          // disabled={flag}
-          onClick={submitHandler}
-        >
-          <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-        </button>
       </div>
       {itemList.map((currentItem) => {
         return (
