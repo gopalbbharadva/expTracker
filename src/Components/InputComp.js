@@ -42,7 +42,7 @@ const InputComp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (item && amt) {
+    if (item.length > 0 && amt !== 0) {
       await firestoreRef.collection("expenses").add({
         item: item,
         itemAmount: amt,
