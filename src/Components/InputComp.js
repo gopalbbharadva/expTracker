@@ -7,9 +7,10 @@ import OutputComp from "./OutputComp";
 
 const InputComp = () => {
   let [total, setTotal] = useState(0);
-  let [item, setItem] = useState("");
-  let [amt, setAmount] = useState("");
+  let [item, setItem] = useState();
+  let [amt, setAmount] = useState();
   const [itemList, setItemList] = useState([]);
+  let place = "which expense";
 
   useEffect(() => {
     getItems();
@@ -48,8 +49,9 @@ const InputComp = () => {
         itemAmount: amt,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
-      setAmount(" ");
-      setItem(" ");
+
+      setAmount("");
+      setItem("");
     } else alert("Plz enter item data");
   };
 
@@ -59,7 +61,13 @@ const InputComp = () => {
         <p style={{ margin: 0, fontSize: "larger" }}>Expense Tracker App</p>
       </header>
       <div className="inputDiv">
-        {total > 0? <h3>{`Total:${total}`}</h3>: <h3>No expenses</h3>}
+        {total > 0 ? (
+          <h3>
+            Bill : <span style={{ color: "red" }}>{total}</span>
+          </h3>
+        ) : (
+          <h3>No expenses</h3>
+        )}
         <form onSubmit={submitHandler}>
           <div className="both">
             <input
@@ -75,10 +83,10 @@ const InputComp = () => {
           </div>
           <div className="both">
             <input
+              placeholder="which expense"
               onChange={(e) => setItem(e.target.value)}
               value={item}
               type="text"
-              placeholder="Which Expense?"
               id="expenseDesc"
             />
             <div>

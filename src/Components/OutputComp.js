@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { firestoreRef } from "../config";
 
 const OutputComp = ({ id, itemName, itemAmt, date }) => {
-  
-
   const deleteItem = () => {
-    const isDelete = window.confirm(`are you sure u want to delete ${itemAmt}`);
+    const isDelete = window.confirm(
+      `are you sure u want to delete ${itemName}`
+    );
     if (isDelete) {
       firestoreRef.collection("expenses").doc(id).delete();
     }

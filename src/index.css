@@ -32,6 +32,7 @@ header {
   display: flex;
   align-items: center;
 }
+
 input {
   font-size: 1rem;
   max-width: 100%;
