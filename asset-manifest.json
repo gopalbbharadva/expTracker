@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/expTracker/static/css/main.bbd9f3cc.chunk.css",
-    "main.js": "/expTracker/static/js/main.830d2dc4.chunk.js",
-    "main.js.map": "/expTracker/static/js/main.830d2dc4.chunk.js.map",
+    "main.js": "/expTracker/static/js/main.7f87230c.chunk.js",
+    "main.js.map": "/expTracker/static/js/main.7f87230c.chunk.js.map",
     "runtime-main.js": "/expTracker/static/js/runtime-main.44b36e9d.js",
     "runtime-main.js.map": "/expTracker/static/js/runtime-main.44b36e9d.js.map",
-    "static/js/2.28ffe8c1.chunk.js": "/expTracker/static/js/2.28ffe8c1.chunk.js",
-    "static/js/2.28ffe8c1.chunk.js.map": "/expTracker/static/js/2.28ffe8c1.chunk.js.map",
+    "static/js/2.d8c1066f.chunk.js": "/expTracker/static/js/2.d8c1066f.chunk.js",
+    "static/js/2.d8c1066f.chunk.js.map": "/expTracker/static/js/2.d8c1066f.chunk.js.map",
     "static/js/3.e8ba40b1.chunk.js": "/expTracker/static/js/3.e8ba40b1.chunk.js",
     "static/js/3.e8ba40b1.chunk.js.map": "/expTracker/static/js/3.e8ba40b1.chunk.js.map",
     "index.html": "/expTracker/index.html",
     "static/css/main.bbd9f3cc.chunk.css.map": "/expTracker/static/css/main.bbd9f3cc.chunk.css.map",
-    "static/js/2.28ffe8c1.chunk.js.LICENSE.txt": "/expTracker/static/js/2.28ffe8c1.chunk.js.LICENSE.txt"
+    "static/js/2.d8c1066f.chunk.js.LICENSE.txt": "/expTracker/static/js/2.d8c1066f.chunk.js.LICENSE.txt",
+    "static/media/clock.ed2439aa.gif": "/expTracker/static/media/clock.ed2439aa.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.44b36e9d.js",
-    "static/js/2.28ffe8c1.chunk.js",
+    "static/js/2.d8c1066f.chunk.js",
     "static/css/main.bbd9f3cc.chunk.css",
-    "static/js/main.830d2dc4.chunk.js"
+    "static/js/main.7f87230c.chunk.js"
   ]
 }
