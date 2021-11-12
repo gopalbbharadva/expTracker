@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRupeeSign, faTag, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { firestoreRef } from "../config";
 import firebase from "firebase";
+import clock from "../Images/clock.gif";
 import OutputComp from "./OutputComp";
 
 const InputComp = () => {
+  let [flag, setFlag] = useState(false);
   let [total, setTotal] = useState(0);
   let [item, setItem] = useState();
   let [amt, setAmount] = useState();
   const [itemList, setItemList] = useState([]);
-  let place = "which expense";
 
   useEffect(() => {
     getItems();
@@ -44,15 +45,20 @@ const InputComp = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (item.length > 0 && amt !== 0) {
-      await firestoreRef.collection("expenses").add({
-        item: item,
-        itemAmount: amt,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-
+      setFlag(!flag);
+      await setTimeout(() => {
+        firestoreRef.collection("expenses").add({
+          item: item,
+          itemAmount: amt,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        setFlag(false);
+      }, 1500);
       setAmount("");
       setItem("");
     } else alert("Plz enter item data");
+    //setFlag(false);
+    console.log(flag);
   };
 
   return (
@@ -60,6 +66,7 @@ const InputComp = () => {
       <header>
         <p style={{ margin: 0, fontSize: "larger" }}>Expense Tracker App</p>
       </header>
+      <img style={{ display: flag ? "block" : "none",margin:'1rem auto' }} src={clock} />
       <div className="inputDiv">
         {total > 0 ? (
           <h3>
