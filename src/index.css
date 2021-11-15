@@ -2,13 +2,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Girassol&family=Open+Sans&display=swap");
 body {
   margin: 0;
+  min-height: 100vh;
+  min-width: 100vh;
+}
+.main {
+  min-height: 100vh;
+  min-width: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 header {
   font-family: "Newsreader", serif;
   border-top-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  max-width: 600px;
-  margin: auto;
+  /* max-width: 600px; */
+  /* margin: auto; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,9 +30,9 @@ header {
   font-family: "Open Sans", sans-serif;
   border-radius: 1rem;
   padding: 0.5rem;
-  max-width: 300px;
-  margin: 1rem auto;
-  background-color: #F3F4F6;
+  /* max-width: 300px; */
+  /* margin: 1rem auto; */
+  background-color: #f3f4f6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,6 +60,10 @@ button {
   font-size: 1rem;
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
+  opacity: 0.8;
+}
+button:hover {
+  opacity: 1;
 }
 button:enabled {
   border-radius: 3px;
@@ -69,36 +83,38 @@ button:disabled {
   justify-content: center;
 }
 
-.expenseItem{
+.expenseItem {
+  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 1rem;
   border-radius: 3px;
-  max-width: 300px;
-  margin: auto;
-  box-shadow: 0 0 3px black;
+  max-width: 250px;
+  width: 100%;
+  /* margin: auto; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.expenseItem div{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+.expenseItem div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
-#delete{
-    cursor: pointer;
-    font-size: x-large;
-    color: red;
-    margin-left: 1rem;
+#delete {
+  cursor: pointer;
+  font-size: x-large;
+  color: red;
+  margin-left: 1rem;
 }
 /* .output p {
   font-size: larger;
   margin: 0;
 } */
-small{
-    color: #059669;
-    padding-top: 0.2rem;
-    margin-right: 1rem;
+small {
+  color: #059669;
+  padding-top: 0.2rem;
+  margin-right: 1rem;
 }
 hr {
   max-width: 400px;
@@ -106,10 +122,32 @@ hr {
   margin-top: 10px;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
 }
-form button{
+form button {
   align-self: center;
+}
+
+.main-model {
+  display: none;
+}
+.model-container {
+  top: 0;
+  left: 0;
+  position: fixed;
+  min-height: 100vh;
+  min-width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.model {
+  padding: 1rem;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
 }

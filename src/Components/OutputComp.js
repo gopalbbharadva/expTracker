@@ -1,30 +1,41 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
-import { firestoreRef } from "../config";
+import {
+  faTrashAlt,
+  faRupeeSign,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 
-const OutputComp = ({ id, itemName, itemAmt, date }) => {
-  const deleteItem = () => {
-    const isDelete = window.confirm(
-      `are you sure u want to delete ${itemName}`
-    );
-    if (isDelete) {
-      firestoreRef.collection("expenses").doc(id).delete();
-    }
-  };
-  if (date) {
-    return (
+const OutputComp = ({ id, itemName, itemAmt, updateExpense }) => {
+  const deleteItem = () => {};
+  return (
+    <>
       <div className="expenseItem">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "self-start",
-          }}
-        >
-          <p style={{ margin: "0" }}>{itemName}</p>
-          <small>{date.toDate().toDateString()}</small>
-          {/* <small>{total}</small> */}
+        <div>
+          <button
+            onClick={() => updateExpense(id)}
+            style={{
+              padding: 0,
+              margin: 0,
+              backgroundColor: "white",
+            }}
+          >
+            <FontAwesomeIcon
+              style={{ color: "blue" }}
+              icon={faEdit}
+            ></FontAwesomeIcon>
+          </button>
+          <div
+            style={{
+              marginLeft: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "self-start",
+            }}
+          >
+            <p style={{ margin: "0" }}>{itemName}</p>
+            {/* <small>{date.toDate().toDateString()}</small> */}
+          </div>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <small>
@@ -43,8 +54,8 @@ const OutputComp = ({ id, itemName, itemAmt, date }) => {
           </button>
         </div>
       </div>
-    );
-  } else return <div></div>;
+    </>
+  );
 };
 
 export default OutputComp;
