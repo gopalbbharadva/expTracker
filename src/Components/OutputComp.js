@@ -10,6 +10,7 @@ const OutputComp = ({
   id,
   itemName,
   itemAmt,
+  time,
   updateExpense,
   deleteExpense,
 }) => {
@@ -39,7 +40,7 @@ const OutputComp = ({
             }}
           >
             <p style={{ margin: "0" }}>{itemName}</p>
-            {/* <small>{date.toDate().toDateString()}</small> */}
+            <small>{time}</small>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>

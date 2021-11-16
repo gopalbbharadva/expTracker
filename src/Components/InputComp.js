@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { uuid } from "uuidv4";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import {
   faRupeeSign,
   faTag,
@@ -8,22 +9,18 @@ import {
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import clock from "../Images/clock.gif";
+import emptyCart from "../Images/emptyCart.png";
 import OutputComp from "./OutputComp";
 
 const InputComp = () => {
   let [flag, setFlag] = useState(false);
   let [total, setTotal] = useState(0);
   let [expenseItem, setExpenseItem] = useState("");
-  let [expenseAmount, setExpenseAmount] = useState('');
-  let [expenseList, setExpenseList] = useState([
-    {
-      id: uuid(),
-      expenseItem: "shoes",
-      expenseAmount: 350,
-    },
-  ]);
+  let [expenseAmount, setExpenseAmount] = useState("");
+  let [expenseList, setExpenseList] = useState([]);
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
+  let d = new Date();
 
   useEffect(() => {
     getTotal();
@@ -77,7 +74,12 @@ const InputComp = () => {
 
         // console.log("else");
         setTimeout(() => {
-          let tempExpense = { id: uuid(), expenseAmount, expenseItem };
+          let tempExpense = {
+            id: uuid(),
+            expenseAmount,
+            expenseItem,
+            time: d.toLocaleTimeString(),
+          };
           setExpenseList([...expenseList, tempExpense]);
         }, 1500);
       }
@@ -96,65 +98,118 @@ const InputComp = () => {
       <header>
         <p style={{ margin: 0, fontSize: "larger" }}>Expense Tracker App</p>
       </header>
-      <img
-        style={{ display: flag ? "block" : "none", margin: "1rem auto" }}
-        src={clock}
-      />
-      <div className="inputDiv">
-        {total > 0 ? (
-          <h3>
-            Bill : <span style={{ color: "red" }}>{total}</span>
-          </h3>
+      <div className="main-container">
+        <img
+          style={{ display: flag ? "block" : "none", margin: "1rem auto" }}
+          src={clock}
+        />
+        <div className="inputDiv">
+          {total > 0 ? (
+            <h3>
+              Bill : <span style={{ color: "red" }}>{total}</span>
+            </h3>
+          ) : null}
+          <form onSubmit={submitHandler}>
+            <div className="both">
+              <input
+                onChange={(e) => setExpenseAmount(Number(e.target.value))}
+                value={expenseAmount}
+                type="number"
+                placeholder="What's Amount?"
+                id="expenseAmount"
+              />
+              <div>
+                <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
+              </div>
+            </div>
+            <div className="both">
+              <input
+                placeholder="which expense"
+                onChange={(e) => setExpenseItem(e.target.value)}
+                value={expenseItem}
+                type="text"
+                id="expenseDesc"
+              />
+              <div>
+                <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
+              </div>
+            </div>
+            <button type="submit" style={{ cursor: "pointer" }}>
+              {isEdit ? (
+                <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
+              ) : (
+                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+              )}
+            </button>
+          </form>
+        </div>
+        {expenseList.length > 0 ? (
+          expenseList.map((currentItem) => {
+            return (
+              <OutputComp
+                key={currentItem.id}
+                id={currentItem.id}
+                itemName={currentItem.expenseItem}
+                itemAmt={currentItem.expenseAmount}
+                time={currentItem.time}
+                deleteExpense={deleteExpense}
+                updateExpense={updateExpense}
+              />
+            );
+          })
         ) : (
-          <h3>No expenses</h3>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <p
+              style={{
+                color: "red",
+                textAlign: "center",
+                margin: "0",
+                fontSize:'1.2rem'
+              }}
+            >
+             Empty List 
+            </p>
+            <img
+              style={{
+                height: "250px",
+                width: "250px",
+                objectFit: "cover",
+              }}
+              src={emptyCart}
+              alt="no preview available"
+            />
+          </div>
         )}
-        <form onSubmit={submitHandler}>
-          <div className="both">
-            <input
-              onChange={(e) => setExpenseAmount(Number(e.target.value))}
-              value={expenseAmount}
-              type="number"
-              placeholder="What's Amount?"
-              id="expenseAmount"
-            />
-            <div>
-              <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
-            </div>
-          </div>
-          <div className="both">
-            <input
-              placeholder="which expense"
-              onChange={(e) => setExpenseItem(e.target.value)}
-              value={expenseItem}
-              type="text"
-              id="expenseDesc"
-            />
-            <div>
-              <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
-            </div>
-          </div>
-          <button type="submit" style={{ cursor: "pointer" }}>
-            {isEdit ? (
-              <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
-            ) : (
-              <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-            )}
-          </button>
-        </form>
       </div>
-      {expenseList.map((currentItem) => {
-        return (
-          <OutputComp
-            key={currentItem.id}
-            id={currentItem.id}
-            itemName={currentItem.expenseItem}
-            itemAmt={currentItem.expenseAmount}
-            deleteExpense={deleteExpense}
-            updateExpense={updateExpense}
-          />
-        );
-      })}
-
+      <footer>
+        <p>Say hi 👋</p>
+        <ul>
+          <li>
+            <a href="https://github.com/gopalbbharadva" target="_blank">
+              <FaGithub />
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/Gopal_33_gb" target="_blank">
+              <FaTwitter />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/gopal-bharadva-1aa880176/"
+              target="_blank"
+            >
+              <FaLinkedin />
+            </a>
+          </li>
+        </ul>
+      </footer>
       {/* expense model */}
 
       {/* {selectExpense && ( 
