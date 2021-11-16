@@ -14,7 +14,7 @@ const InputComp = () => {
   let [flag, setFlag] = useState(false);
   let [total, setTotal] = useState(0);
   let [expenseItem, setExpenseItem] = useState("");
-  let [expenseAmount, setExpenseAmount] = useState("");
+  let [expenseAmount, setExpenseAmount] = useState('');
   let [expenseList, setExpenseList] = useState([
     {
       id: uuid(),
@@ -25,10 +25,14 @@ const InputComp = () => {
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
 
-  const getTotal = async () => {
-    await setTotal(
+  useEffect(() => {
+    getTotal();
+  }, [expenseList]);
+
+  const getTotal = () => {
+    setTotal(
       expenseList.reduce((acc, item) => {
-        return (acc += parseInt(item.amt));
+        return (acc += item.expenseAmount);
       }, 0)
     );
   };
@@ -42,10 +46,23 @@ const InputComp = () => {
     setId(id);
   };
 
+  const deleteExpense = (id) => {
+    // let deleteExpense = expenseList.find((item) => item.id === id);
+    let deleteExpenseIndex = expenseList.findIndex((item) => item.id === id);
+    let isDelete = window.confirm(
+      `Are you sure you want to delete ${expenseList[deleteExpenseIndex].expenseItem}`
+    );
+    if (isDelete) {
+      let tempExpenseArray = expenseList.slice();
+      tempExpenseArray.splice(deleteExpenseIndex, 1);
+      setExpenseList(tempExpenseArray);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (expenseItem.length > 0 && expenseAmount !== 0) {
-      console.log(flag);
+      // console.log(flag);
       if (isEdit) {
         let tempExpenseList = expenseList.map((item) => {
           return item.id === id
@@ -58,7 +75,7 @@ const InputComp = () => {
         flag = true;
         setFlag(flag);
 
-        console.log("else");
+        // console.log("else");
         setTimeout(() => {
           let tempExpense = { id: uuid(), expenseAmount, expenseItem };
           setExpenseList([...expenseList, tempExpense]);
@@ -66,11 +83,12 @@ const InputComp = () => {
       }
       flag = false;
       setFlag(flag);
-      console.log(flag);
+      // console.log(flag);
 
       setExpenseAmount("");
       setExpenseItem("");
     } else alert("Plz enter item data");
+    // getTotal();
   };
 
   return (
@@ -93,7 +111,7 @@ const InputComp = () => {
         <form onSubmit={submitHandler}>
           <div className="both">
             <input
-              onChange={(e) => setExpenseAmount(e.target.value)}
+              onChange={(e) => setExpenseAmount(Number(e.target.value))}
               value={expenseAmount}
               type="number"
               placeholder="What's Amount?"
@@ -131,7 +149,7 @@ const InputComp = () => {
             id={currentItem.id}
             itemName={currentItem.expenseItem}
             itemAmt={currentItem.expenseAmount}
-            // date={currentItem.date}
+            deleteExpense={deleteExpense}
             updateExpense={updateExpense}
           />
         );

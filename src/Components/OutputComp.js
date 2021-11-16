@@ -6,8 +6,13 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
-const OutputComp = ({ id, itemName, itemAmt, updateExpense }) => {
-  const deleteItem = () => {};
+const OutputComp = ({
+  id,
+  itemName,
+  itemAmt,
+  updateExpense,
+  deleteExpense,
+}) => {
   return (
     <>
       <div className="expenseItem">
@@ -42,7 +47,7 @@ const OutputComp = ({ id, itemName, itemAmt, updateExpense }) => {
             {itemAmt} <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
           </small>
           <button
-            onClick={deleteItem}
+            onClick={() => deleteExpense(id)}
             style={{
               backgroundColor: "red",
               padding: "0",
