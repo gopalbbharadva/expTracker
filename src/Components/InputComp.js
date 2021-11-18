@@ -44,7 +44,6 @@ const InputComp = () => {
   };
 
   const deleteExpense = (id) => {
-    // let deleteExpense = expenseList.find((item) => item.id === id);
     let deleteExpenseIndex = expenseList.findIndex((item) => item.id === id);
     let isDelete = window.confirm(
       `Are you sure you want to delete ${expenseList[deleteExpenseIndex].expenseItem}`
@@ -59,7 +58,6 @@ const InputComp = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (expenseItem.length > 0 && expenseAmount !== 0) {
-      // console.log(flag);
       if (isEdit) {
         let tempExpenseList = expenseList.map((item) => {
           return item.id === id
@@ -69,10 +67,6 @@ const InputComp = () => {
         setExpenseList(tempExpenseList);
         setEdit(false);
       } else {
-        flag = true;
-        setFlag(flag);
-
-        // console.log("else");
         setTimeout(() => {
           let tempExpense = {
             id: uuid(),
@@ -83,12 +77,8 @@ const InputComp = () => {
           setExpenseList([...expenseList, tempExpense]);
         }, 1500);
       }
-      flag = false;
-      setFlag(flag);
-      // console.log(flag);
-
-      setExpenseAmount("");
       setExpenseItem("");
+      setExpenseAmount("");
     } else alert("Plz enter item data");
     // getTotal();
   };
@@ -115,7 +105,7 @@ const InputComp = () => {
                 onChange={(e) => setExpenseAmount(Number(e.target.value))}
                 value={expenseAmount}
                 type="number"
-                placeholder="What's Amount?"
+                placeholder="e.g 650"
                 id="expenseAmount"
               />
               <div>
@@ -124,7 +114,7 @@ const InputComp = () => {
             </div>
             <div className="both">
               <input
-                placeholder="which expense"
+                placeholder="Shoes"
                 onChange={(e) => setExpenseItem(e.target.value)}
                 value={expenseItem}
                 type="text"
@@ -134,7 +124,7 @@ const InputComp = () => {
                 <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
               </div>
             </div>
-            <button type="submit" style={{ cursor: "pointer" }}>
+            <button type="submit">
               {isEdit ? (
                 <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
               ) : (
@@ -158,32 +148,9 @@ const InputComp = () => {
             );
           })
         ) : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <p
-              style={{
-                color: "red",
-                textAlign: "center",
-                margin: "0",
-                fontSize:'1.2rem'
-              }}
-            >
-             Empty List 
-            </p>
-            <img
-              style={{
-                height: "250px",
-                width: "250px",
-                objectFit: "cover",
-              }}
-              src={emptyCart}
-              alt="no preview available"
-            />
+          <div className="empty-list">
+            <p>Empty List</p>
+            <img src={emptyCart} alt="no preview available" />
           </div>
         )}
       </div>
