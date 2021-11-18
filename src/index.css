@@ -20,7 +20,7 @@ body {
 }
 header {
   font-family: "Lato", sans-serif;
-  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
   max-width: 600px;
   width: 100%;

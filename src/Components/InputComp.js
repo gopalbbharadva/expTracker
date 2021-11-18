@@ -61,6 +61,7 @@ const InputComp = () => {
       ) {
         setExpenseAmount("");
         setExpenseItem("");
+        setEdit(false);
       }
     }
   };
