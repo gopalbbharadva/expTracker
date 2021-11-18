@@ -14,9 +14,9 @@ import OutputComp from "./OutputComp";
 
 const InputComp = () => {
   let [flag, setFlag] = useState(false);
-  let [total, setTotal] = useState(0);
+  let [total, setTotal] = useState("");
   let [expenseItem, setExpenseItem] = useState("");
-  let [expenseAmount, setExpenseAmount] = useState("");
+  let [expenseAmount, setExpenseAmount] = useState();
   let [expenseList, setExpenseList] = useState([]);
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
@@ -44,14 +44,24 @@ const InputComp = () => {
   };
 
   const deleteExpense = (id) => {
-    let deleteExpenseIndex = expenseList.findIndex((item) => item.id === id);
+    let deleteExpense = expenseList.find((item) => item.id === id);
+    let deleteExpenseIndex = expenseList.findIndex(
+      (item) => item.id === deleteExpense.id
+    );
     let isDelete = window.confirm(
-      `Are you sure you want to delete ${expenseList[deleteExpenseIndex].expenseItem}`
+      `Are you sure you want to delete ${deleteExpense.expenseItem}`
     );
     if (isDelete) {
       let tempExpenseArray = expenseList.slice();
       tempExpenseArray.splice(deleteExpenseIndex, 1);
       setExpenseList(tempExpenseArray);
+      if (
+        expenseAmount === deleteExpense.expenseAmount ||
+        expenseItem === deleteExpense.expenseItem
+      ) {
+        setExpenseAmount("");
+        setExpenseItem("");
+      }
     }
   };
 
@@ -96,7 +106,7 @@ const InputComp = () => {
         <div className="inputDiv">
           {total > 0 ? (
             <h3>
-              Bill : <span style={{ color: "red" }}>{total}</span>
+              Total Spending : <span style={{ color: "red" }}>{total}</span>
             </h3>
           ) : null}
           <form onSubmit={submitHandler}>
