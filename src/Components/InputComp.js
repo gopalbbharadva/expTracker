@@ -68,30 +68,31 @@ const InputComp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (expenseItem.length > 0 && expenseAmount !== 0) {
-      if (isEdit) {
-        let tempExpenseList = expenseList.map((item) => {
-          return item.id === id
-            ? { ...item, expenseItem, expenseAmount }
-            : item;
-        });
-        setExpenseList(tempExpenseList);
-        setEdit(false);
-      } else {
-        setTimeout(() => {
-          let tempExpense = {
-            id: uuid(),
-            expenseAmount,
-            expenseItem,
-            time: d.toLocaleTimeString(),
-          };
-          setExpenseList([...expenseList, tempExpense]);
-        }, 1500);
-      }
-      setExpenseItem("");
-      setExpenseAmount("");
+    if (expenseItem.length > 0) {
+      if (expenseAmount > 0) {
+        if (isEdit) {
+          let tempExpenseList = expenseList.map((item) => {
+            return item.id === id
+              ? { ...item, expenseItem, expenseAmount }
+              : item;
+          });
+          setExpenseList(tempExpenseList);
+          setEdit(false);
+        } else {
+          setTimeout(() => {
+            let tempExpense = {
+              id: uuid(),
+              expenseAmount,
+              expenseItem,
+              time: d.toLocaleTimeString(),
+            };
+            setExpenseList([...expenseList, tempExpense]);
+          }, 1500);
+        }
+        setExpenseItem("");
+        setExpenseAmount("");
+      } else alert("Price should not be less than 1");
     } else alert("Plz enter item data");
-    // getTotal();
   };
 
   return (
