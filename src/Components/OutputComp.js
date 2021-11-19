@@ -19,6 +19,7 @@ const OutputComp = ({
       <div className="expenseItem">
         <div>
           <button
+            className="group-button"
             onClick={() => updateExpense(id)}
             style={{
               padding: 0,
@@ -48,6 +49,7 @@ const OutputComp = ({
             {itemAmt} <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
           </small>
           <button
+            className="group-button"
             onClick={() => deleteExpense(id)}
             style={{
               backgroundColor: "red",

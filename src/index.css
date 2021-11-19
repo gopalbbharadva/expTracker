@@ -72,24 +72,24 @@ input::placeholder {
 input:focus {
   outline: none;
 }
-button {
+.group-button {
   cursor: pointer;
   font-size: 1rem;
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   opacity: 0.8;
 }
-button:hover {
+.group-button:hover {
   opacity: 1;
 }
-button:enabled {
+.group-button:enabled {
   border-radius: 3px;
   border: none;
   background-color: black;
   color: white;
   cursor: pointer;
 }
-button:disabled {
+.group-button:disabled {
   cursor: not-allowed;
 }
 .output {
@@ -112,7 +112,6 @@ button:disabled {
   width: 100%;
   /* margin: auto; */
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  
 }
 .expenseItem div {
   display: flex;

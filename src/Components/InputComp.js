@@ -11,12 +11,15 @@ import {
 import clock from "../Images/clock.gif";
 import emptyCart from "../Images/emptyCart.png";
 import OutputComp from "./OutputComp";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+toast.configure();
 const InputComp = () => {
   let [flag, setFlag] = useState(false);
   let [total, setTotal] = useState("");
   let [expenseItem, setExpenseItem] = useState("");
-  let [expenseAmount, setExpenseAmount] = useState();
+  let [expenseAmount, setExpenseAmount] = useState("");
   let [expenseList, setExpenseList] = useState([]);
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
@@ -35,8 +38,8 @@ const InputComp = () => {
   };
 
   const updateExpense = (id) => {
-    let tempExpense = expenseList.find((item) => item.id === id);
-    let { expenseItem, expenseAmount } = tempExpense;
+    let editExpense = expenseList.find((item) => item.id === id);
+    let { expenseItem, expenseAmount } = editExpense;
     setExpenseItem(expenseItem);
     setExpenseAmount(expenseAmount);
     setEdit(true);
@@ -55,6 +58,9 @@ const InputComp = () => {
       let tempExpenseArray = expenseList.slice();
       tempExpenseArray.splice(deleteExpenseIndex, 1);
       setExpenseList(tempExpenseArray);
+      toast.warning(`${deleteExpense.expenseItem} deleted Successfully.`, {
+        autoClose: 1500,
+      });
       if (
         expenseAmount === deleteExpense.expenseAmount ||
         expenseItem === deleteExpense.expenseItem
@@ -78,6 +84,10 @@ const InputComp = () => {
           });
           setExpenseList(tempExpenseList);
           setEdit(false);
+          toast.info(`${expenseItem} expense updated successfully`, {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 2000,
+          });
         } else {
           setTimeout(() => {
             let tempExpense = {
@@ -87,12 +97,28 @@ const InputComp = () => {
               time: d.toLocaleTimeString(),
             };
             setExpenseList([...expenseList, tempExpense]);
-          }, 1500);
+            console.log(tempExpense)
+            toast.success(
+              `${tempExpense.expenseItem} expense added successfully`,
+              {
+                position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 1500,
+              }
+            );
+          }, 2000);
         }
         setExpenseItem("");
         setExpenseAmount("");
-      } else alert("Price should not be less than 1");
-    } else alert("Plz enter item data");
+      } else
+        toast.error("Price should not be less than 1", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        });
+    } else
+      toast.error("Plz enter item data", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+      });
   };
 
   return (
@@ -136,7 +162,7 @@ const InputComp = () => {
                 <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
               </div>
             </div>
-            <button type="submit">
+            <button className="group-button" type="submit">
               {isEdit ? (
                 <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
               ) : (
