@@ -97,7 +97,7 @@ const InputComp = () => {
               time: d.toLocaleTimeString(),
             };
             setExpenseList([...expenseList, tempExpense]);
-            console.log(tempExpense)
+            console.log(tempExpense);
             toast.success(
               `${tempExpense.expenseItem} expense added successfully`,
               {
@@ -124,7 +124,7 @@ const InputComp = () => {
   return (
     <div className="main">
       <header>
-        <p style={{ margin: 0, fontSize: "larger" }}>Expense Tracker App</p>
+        <p>Expense Tracker App</p>
       </header>
       <div className="main-container">
         <img
