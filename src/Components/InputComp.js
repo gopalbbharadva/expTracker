@@ -32,7 +32,7 @@ const InputComp = () => {
   const getTotal = () => {
     setTotal(
       expenseList.reduce((acc, item) => {
-        return (acc += item.expenseAmount);
+        return (acc += Number(item.expenseAmount));
       }, 0)
     );
   };
@@ -59,7 +59,7 @@ const InputComp = () => {
       tempExpenseArray.splice(deleteExpenseIndex, 1);
       setExpenseList(tempExpenseArray);
       toast.warning(`${deleteExpense.expenseItem} deleted Successfully.`, {
-        autoClose: 1500,
+        autoClose: 2000,
       });
       if (
         expenseAmount === deleteExpense.expenseAmount ||
@@ -92,7 +92,7 @@ const InputComp = () => {
           setTimeout(() => {
             let tempExpense = {
               id: uuid(),
-              expenseAmount,
+              expenseAmount: Number(expenseAmount),
               expenseItem,
               time: d.toLocaleTimeString(),
             };
@@ -102,10 +102,10 @@ const InputComp = () => {
               `${tempExpense.expenseItem} expense added successfully`,
               {
                 position: toast.POSITION.BOTTOM_CENTER,
-                autoClose: 1500,
+                autoClose: 2000,
               }
             );
-          }, 2000);
+          }, 1000);
         }
         setExpenseItem("");
         setExpenseAmount("");
@@ -115,7 +115,7 @@ const InputComp = () => {
           autoClose: 2000,
         });
     } else
-      toast.error("Plz enter item data", {
+      toast.error("Please enter expense name", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
@@ -140,7 +140,7 @@ const InputComp = () => {
           <form onSubmit={submitHandler}>
             <div className="both">
               <input
-                onChange={(e) => setExpenseAmount(Number(e.target.value))}
+                onChange={(e) => setExpenseAmount(e.target.value)}
                 value={expenseAmount}
                 type="number"
                 placeholder="e.g 650"
@@ -193,7 +193,7 @@ const InputComp = () => {
         )}
       </div>
       <footer>
-        <p>Say hi 👋</p>
+        <p>Say Hi 👋</p>
         <ul>
           <li>
             <a href="https://github.com/gopalbbharadva" target="_blank">

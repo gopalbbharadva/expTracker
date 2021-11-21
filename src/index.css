@@ -112,7 +112,7 @@ input:focus {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 1rem;
   border-radius: 3px;
-  max-width: 300px;
+  max-width: 250px;
   width: 100%;
   /* margin: auto; */
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
