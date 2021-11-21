@@ -74,51 +74,45 @@ const InputComp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (expenseItem.length > 0) {
-      if (expenseAmount > 0) {
-        if (isEdit) {
-          let tempExpenseList = expenseList.map((item) => {
-            return item.id === id
-              ? { ...item, expenseItem, expenseAmount }
-              : item;
-          });
-          setExpenseList(tempExpenseList);
-          setEdit(false);
-          toast.info(`${expenseItem} expense updated successfully`, {
-            position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 2000,
-          });
-        } else {
-          setTimeout(() => {
-            let tempExpense = {
-              id: uuid(),
-              expenseAmount: Number(expenseAmount),
-              expenseItem,
-              time: d.toLocaleTimeString(),
-            };
-            setExpenseList([...expenseList, tempExpense]);
-            console.log(tempExpense);
-            toast.success(
-              `${tempExpense.expenseItem} expense added successfully`,
-              {
-                position: toast.POSITION.BOTTOM_CENTER,
-                autoClose: 2000,
-              }
-            );
-          }, 1000);
-        }
-        setExpenseItem("");
-        setExpenseAmount("");
-      } else
-        toast.error("Price should not be less than 1", {
-          position: toast.POSITION.TOP_CENTER,
+    if (expenseAmount > 0) {
+      if (isEdit) {
+        let tempExpenseList = expenseList.map((item) => {
+          return item.id === id
+            ? { ...item, expenseItem, expenseAmount }
+            : item;
+        });
+        setExpenseList(tempExpenseList);
+        setEdit(false);
+        toast.info(`${expenseItem} expense updated successfully`, {
+          position: toast.POSITION.BOTTOM_CENTER,
           autoClose: 2000,
         });
-    } else
-      toast.error("Please enter expense name", {
+      } else {
+        setTimeout(() => {
+          let tempExpense = {
+            id: uuid(),
+            expenseAmount: Number(expenseAmount),
+            expenseItem,
+            time: d.toLocaleTimeString(),
+          };
+          setExpenseList([...expenseList, tempExpense]);
+          toast.success(
+            `${tempExpense.expenseItem} expense added successfully`,
+            {
+              position: toast.POSITION.BOTTOM_CENTER,
+              autoClose: 2000,
+            }
+          );
+        }, 1000);
+      }
+    } else {
+      toast.error("Price should be greater than 0", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        autoClose: 1500,
       });
+    }
+    setExpenseItem("");
+    setExpenseAmount("");
   };
 
   return (
@@ -140,6 +134,7 @@ const InputComp = () => {
           <form onSubmit={submitHandler}>
             <div className="both">
               <input
+                required
                 onChange={(e) => setExpenseAmount(e.target.value)}
                 value={expenseAmount}
                 type="number"
@@ -152,6 +147,7 @@ const InputComp = () => {
             </div>
             <div className="both">
               <input
+                required
                 placeholder="Shoes"
                 onChange={(e) => setExpenseItem(e.target.value)}
                 value={expenseItem}
