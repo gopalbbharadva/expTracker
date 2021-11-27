@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { uuid } from "uuidv4";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaTwitter, FaLinkedin, FaSun, FaMoon } from "react-icons/fa";
 import {
   faRupeeSign,
   faTag,
   faCheck,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
-import clock from "../Images/clock.gif";
 import emptyCart from "../Images/emptyCart.png";
 import OutputComp from "./OutputComp";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { themeContext } from "../Contexts/Themecontext";
 
 toast.configure();
 const InputComp = () => {
-  let [flag, setFlag] = useState(false);
   let [total, setTotal] = useState("");
   let [expenseItem, setExpenseItem] = useState("");
   let [expenseAmount, setExpenseAmount] = useState("");
@@ -24,6 +23,9 @@ const InputComp = () => {
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
   let d = new Date();
+
+  const { light, dark, isLightTheme, toggleTheme } = useContext(themeContext);
+  const currentTheme = isLightTheme ? light : dark;
 
   useEffect(() => {
     getTotal();
@@ -116,16 +118,37 @@ const InputComp = () => {
   };
 
   return (
-    <div className="main">
-      <header>
-        <p>Expense Tracker App</p>
+    <div
+      style={{
+        backgroundColor: currentTheme.bgColor,
+      }}
+      className="main"
+    >
+      <header
+        style={{
+          backgroundColor: currentTheme.bgColor,
+          border: `2px solid ${currentTheme.borderColor} `,
+        }}
+      >
+        <p
+          style={{
+            color: currentTheme.textColor,
+          }}
+        >
+          Expense Tracker App
+        </p>
+        <button onClick={toggleTheme} className="theme-button">
+          <FaMoon />
+        </button>
       </header>
       <div className="main-container">
-        <img
-          style={{ display: flag ? "block" : "none", margin: "1rem auto" }}
-          src={clock}
-        />
-        <div className="inputDiv">
+        <div
+          style={{
+            backgroundColor: currentTheme.formBG,
+            boxShadow: `inset 10px 5px 20px rgba(0, 0, 0, 0.1), inset 10px 5px 10px ${currentTheme.formBG}`,
+          }}
+          className="inputDiv"
+        >
           {total > 0 ? (
             <h3>
               Total Spending : <span style={{ color: "red" }}>{total}</span>
@@ -142,7 +165,12 @@ const InputComp = () => {
                 id="expenseAmount"
               />
               <div>
-                <FontAwesomeIcon icon={faRupeeSign}></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  style={{
+                    color: currentTheme.textColor,
+                  }}
+                  icon={faRupeeSign}
+                ></FontAwesomeIcon>
               </div>
             </div>
             <div className="both">
@@ -155,14 +183,29 @@ const InputComp = () => {
                 id="expenseDesc"
               />
               <div>
-                <FontAwesomeIcon icon={faTag}></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  style={{
+                    color: currentTheme.textColor,
+                  }}
+                  icon={faTag}
+                ></FontAwesomeIcon>
               </div>
             </div>
             <button className="group-button" type="submit">
               {isEdit ? (
-                <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  style={{
+                    color: currentTheme.textColor,
+                  }}
+                  icon={faWrench}
+                ></FontAwesomeIcon>
               ) : (
-                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  style={{
+                    color: currentTheme.textColor,
+                  }}
+                  icon={faCheck}
+                ></FontAwesomeIcon>
               )}
             </button>
           </form>
@@ -188,21 +231,47 @@ const InputComp = () => {
           </div>
         )}
       </div>
-      <footer>
-        <p>Say Hi 👋</p>
+      <footer
+        style={{
+          backgroundColor: currentTheme.bgColor,
+          border: `2px solid ${currentTheme.borderColor}`,
+        }}
+      >
+        <p
+          style={{
+            color: currentTheme.textColor,
+          }}
+        >
+          Say Hi 👋
+        </p>
         <ul>
           <li>
-            <a href="https://github.com/gopalbbharadva" target="_blank">
+            <a
+              style={{
+                color: currentTheme.textColor,
+              }}
+              href="https://github.com/gopalbbharadva"
+              target="_blank"
+            >
               <FaGithub />
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/Gopal_33_gb" target="_blank">
+            <a
+              style={{
+                color: currentTheme.textColor,
+              }}
+              href="https://twitter.com/Gopal_33_gb"
+              target="_blank"
+            >
               <FaTwitter />
             </a>
           </li>
           <li>
             <a
+              style={{
+                color: currentTheme.textColor,
+              }}
               href="https://www.linkedin.com/in/gopal-bharadva-1aa880176/"
               target="_blank"
             >
