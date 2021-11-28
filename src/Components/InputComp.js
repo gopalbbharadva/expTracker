@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { uuid } from "uuidv4";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaGithub, FaTwitter, FaLinkedin, FaSun, FaMoon } from "react-icons/fa";
+import { FaGithub, FaTwitter, FaLinkedin, FaMoon, FaSun } from "react-icons/fa";
 import {
   faRupeeSign,
   faTag,
@@ -137,8 +137,14 @@ const InputComp = () => {
         >
           Expense Tracker App
         </p>
-        <button onClick={toggleTheme} className="theme-button">
-          <FaMoon />
+        <button
+          onClick={toggleTheme}
+          style={{
+            color: isLightTheme ? "black" : "white",
+          }}
+          className="theme-button"
+        >
+          {isLightTheme ? <FaMoon /> : <FaSun />}
         </button>
       </header>
       <div className="main-container">
@@ -191,21 +197,19 @@ const InputComp = () => {
                 ></FontAwesomeIcon>
               </div>
             </div>
-            <button className="group-button" type="submit">
+            <button
+              style={{
+                backgroundColor: currentTheme.bgColor,
+                color: currentTheme.textColor,
+                border: `2px solid ${currentTheme.borderColor}`,
+              }}
+              className="group-button"
+              type="submit"
+            >
               {isEdit ? (
-                <FontAwesomeIcon
-                  style={{
-                    color: currentTheme.textColor,
-                  }}
-                  icon={faWrench}
-                ></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
               ) : (
-                <FontAwesomeIcon
-                  style={{
-                    color: currentTheme.textColor,
-                  }}
-                  icon={faCheck}
-                ></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
               )}
             </button>
           </form>

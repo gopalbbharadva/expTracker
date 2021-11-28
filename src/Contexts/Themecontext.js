@@ -8,13 +8,13 @@ function ThemeContextProvider(props) {
     textColor: "black",
     bgColor: "white",
     borderColor: "black",
-    formBG: "#4B5563",
+    formBG: "#E5E7EB",
   };
   const dark = {
     textColor: "white",
     bgColor: "black",
     borderColor: "white",
-    formBG: "#E5E7EB",
+    formBG: "#4B5563",
   };
   let [isLightTheme, setLightTheme] = useState(true);
   const toggleTheme = () => {
