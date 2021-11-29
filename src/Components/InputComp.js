@@ -29,7 +29,7 @@ const InputComp = () => {
 
   useEffect(() => {
     getTotal();
-  }, [expenseList]);
+  });
 
   const getTotal = () => {
     setTotal(
@@ -256,6 +256,7 @@ const InputComp = () => {
               }}
               href="https://github.com/gopalbbharadva"
               target="_blank"
+              rel="noreferrer"
             >
               <FaGithub />
             </a>
@@ -267,6 +268,7 @@ const InputComp = () => {
               }}
               href="https://twitter.com/Gopal_33_gb"
               target="_blank"
+              rel="noreferrer"
             >
               <FaTwitter />
             </a>
@@ -278,6 +280,7 @@ const InputComp = () => {
               }}
               href="https://www.linkedin.com/in/gopal-bharadva-1aa880176/"
               target="_blank"
+              rel="noreferrer"
             >
               <FaLinkedin />
             </a>
