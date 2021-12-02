@@ -23,19 +23,8 @@ const InputComp = () => {
   let [isEdit, setEdit] = useState(false);
   let [id, setId] = useState(0);
   let d = new Date();
-  const light = {
-    textColor: "black",
-    bgColor: "white",
-    borderColor: "black",
-    formBG: "#E5E7EB",
-  };
-  const dark = {
-    textColor: "white",
-    bgColor: "black",
-    borderColor: "white",
-    formBG: "#4B5563",
-  };
-  const { isLightTheme, toggleTheme } = useContext(themeContext);
+
+  const { light, dark, isLightTheme, toggleTheme } = useContext(themeContext);
   const currentTheme = isLightTheme ? light : dark;
 
   useEffect(() => {
