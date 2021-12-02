@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashAlt,
   faRupeeSign,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import { themeContext } from "../Contexts/Themecontext";
 
 const OutputComp = ({
   id,
@@ -14,9 +15,17 @@ const OutputComp = ({
   updateExpense,
   deleteExpense,
 }) => {
+  const { light, dark, isLightTheme } = useContext(themeContext);
+  const currentTheme = isLightTheme ? light : dark;
   return (
     <>
-      <div className="expenseItem">
+      <div
+        className="expenseItem"
+        style={{
+          border: `2px solid ${currentTheme.borderColor}`,
+          borderRadius: '5px',
+        }}
+      >
         <div>
           <button
             className="group-button"
@@ -40,7 +49,9 @@ const OutputComp = ({
               alignItems: "self-start",
             }}
           >
-            <p style={{ margin: "0" }}>{itemName}</p>
+            <p style={{ margin: "0", color: currentTheme.textColor }}>
+              {itemName}
+            </p>
             <small>{time}</small>
           </div>
         </div>
