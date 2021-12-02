@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashAlt,
@@ -23,7 +23,7 @@ const OutputComp = ({
         className="expenseItem"
         style={{
           border: `2px solid ${currentTheme.borderColor}`,
-          borderRadius: '5px',
+          borderRadius: "5px",
         }}
       >
         <div>
