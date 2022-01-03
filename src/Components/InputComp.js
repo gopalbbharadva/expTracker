@@ -7,6 +7,7 @@ import {
   faTag,
   faCheck,
   faWrench,
+  faTrashRestore,
 } from "@fortawesome/free-solid-svg-icons";
 import emptyCart from "../Images/emptyCart.png";
 import OutputComp from "./OutputComp";
@@ -117,6 +118,17 @@ const InputComp = () => {
     setExpenseAmount("");
   };
 
+  const resetExpenseList = () => {
+    let isReset = window.confirm("Are you sure you want to reset expense list");
+    if (isReset) {
+      setExpenseList([]);
+      toast.info("Your list is reset successfully", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 2000,
+      });
+    }
+  };
+
   return (
     <div
       style={{
@@ -197,21 +209,30 @@ const InputComp = () => {
                 ></FontAwesomeIcon>
               </div>
             </div>
-            <button
-              style={{
-                backgroundColor: currentTheme.bgColor,
-                color: currentTheme.textColor,
-                border: `2px solid ${currentTheme.borderColor}`,
-              }}
-              className="group-button"
-              type="submit"
-            >
-              {isEdit ? (
-                <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
-              ) : (
-                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-              )}
-            </button>
+            <div class="button-section">
+              <button
+                style={{
+                  backgroundColor: currentTheme.bgColor,
+                  color: currentTheme.textColor,
+                  border: `2px solid ${currentTheme.borderColor}`,
+                }}
+                className="group-button"
+                type="submit"
+              >
+                {isEdit ? (
+                  <FontAwesomeIcon icon={faWrench}></FontAwesomeIcon>
+                ) : (
+                  <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                )}
+              </button>
+              <button
+                type="reset"
+                className="group-button"
+                onClick={resetExpenseList}
+              >
+                <FontAwesomeIcon icon={faTrashRestore}></FontAwesomeIcon>
+              </button>
+            </div>
           </form>
         </div>
         {expenseList.length > 0 ? (
